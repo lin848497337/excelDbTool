@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+	<namespace name="test">
+	    
+	    <enum name="TestEnum"  type="int">
+	        <case name="TEST_1" value="0" str="测试1"/>
+	        <case name="TEST_2" value="1" str="测试2"/>
+	    </enum>
+	    
+	    <table name="Test" excelFile="Test.xls" >
+	        <variable name="id"  colName="id" type="int" range="1-100"/>
+	        <variable name="testType"  colName="测试类型" type="test.TestEnum" />
+	    </table>
+	</namespace>
+</meta>
