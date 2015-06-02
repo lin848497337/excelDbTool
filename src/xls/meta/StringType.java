@@ -32,4 +32,19 @@ public class StringType implements Type {
 		return dataValidation;
 	}
 
+	@Override
+	public String getPrintStr() {
+		return "String";
+	}
+
+	@Override
+	public String save(String name, String element) {
+		return String.format("%s.addAttribute(\"%s\",%s)", element,name,name);
+	}
+
+	@Override
+	public String read(String name, String element) {
+		return String.format("%s.attributeValue(\"%s\")", element,name);
+	}
+
 }

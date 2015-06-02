@@ -1,5 +1,7 @@
 package xls.meta;
 
+import java.io.PrintWriter;
+
 import org.dom4j.Element;
 
 public class KeyColMetaData implements MetaData {
@@ -30,8 +32,12 @@ public class KeyColMetaData implements MetaData {
 
 	@Override
 	public void setPackage(String pkg) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void print(PrintWriter writer) {
+		writer.println(String.format("\tpublic %s %s;",typeObject.getPrintStr(),name));
 	}
 
 }

@@ -1,9 +1,12 @@
 package xls.meta;
 
+import java.io.PrintWriter;
+
 import org.apache.poi.ss.usermodel.DataValidation;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddressList;
+import org.dom4j.Element;
 
 
 public class IntegerType implements Type {
@@ -33,5 +36,21 @@ public class IntegerType implements Type {
 		dataValidation.createPromptBox(col.name, note);
 		return dataValidation;
 	}
+
+	@Override
+	public String getPrintStr() {
+		return "int";
+	}
+
+	@Override
+	public String save(String name, String element) {
+		return String.format("%s.addAttribute(\"%s\",%s+\"\")", element,name,name);
+	}
+
+	@Override
+	public String read(String name, String element) {
+		return String.format("Integer.parseInt(%s.attributeValue(\"%s\"))",element,name);
+	}
+
 
 }

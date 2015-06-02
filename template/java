@@ -1,0 +1,38 @@
+package %package;
+import xls.meta.XMLManager;
+
+
+public class %class extends XMLManager<%class>{
+
+	public static java.util.Map<Integer,%class> dataMap = new java.util.HashMap<Integer,%class>();
+	
+	%properties_begin
+	public %type %property;
+	%properties_end
+	
+	@Override
+	public void load(org.dom4j.Element element){
+		%properties_load_begin
+		
+		%properties_load_end
+	}
+	@Override
+	public void write(org.dom4j.Element element){
+		%properties_save
+	}
+	
+	public static java.util.Map<Integer,%class> getAll(){
+		return dataMap;
+	}
+	
+	public static void load(){
+		org.dom4j.Element element = XMLManager.getRootElement(%file);
+		java.util.Iterator<org.dom4j.Element> it = el.elementIterator();
+		while(it.hasNext()){
+			org.dom4j.Element el = it.next();
+			%class data = new %class();
+			data.load(el);
+			dataMap.put(el.id,el);
+		}
+	}
+}

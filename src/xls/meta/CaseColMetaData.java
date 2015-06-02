@@ -1,5 +1,7 @@
 package xls.meta;
 
+import java.io.PrintWriter;
+
 import org.dom4j.Element;
 
 public class CaseColMetaData implements MetaData {
@@ -7,6 +9,7 @@ public class CaseColMetaData implements MetaData {
 	public String name;
 	public String str;
 	public String value;
+	public Type type;
 	
 	@Override
 	public String getName() {
@@ -29,6 +32,11 @@ public class CaseColMetaData implements MetaData {
 	public void setPackage(String pkg) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void print(PrintWriter writer) {
+		writer.println(String.format("\tpublic static final %s %s=%s;",type.getPrintStr(),name,value));
 	}
 
 }

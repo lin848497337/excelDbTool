@@ -6,5 +6,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 public interface Type {
 	public String name();
 	public void compile();
+	public String getPrintStr();
 	public DataValidation createDataValidation(ColMetaData col, Sheet sheet, int maxRowNum, int index);
+	public String save(String name,String element);
+	public String read(String name,String element);
 }

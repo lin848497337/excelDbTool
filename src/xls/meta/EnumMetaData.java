@@ -1,5 +1,6 @@
 package xls.meta;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,11 +13,11 @@ import org.dom4j.Element;
 
 public class EnumMetaData implements Type ,MetaData{
 
-	private String name;
-	private String type;
-	private Type typeObject;
-	private String pkg;
-	private List<CaseColMetaData> caseList = new ArrayList<CaseColMetaData>();
+	public String name;
+	public String type;
+	public Type typeObject;
+	public String pkg;
+	public List<CaseColMetaData> caseList = new ArrayList<CaseColMetaData>();
 	
 	@Override
 	public String name() {
@@ -27,6 +28,7 @@ public class EnumMetaData implements Type ,MetaData{
 	public void compile() {
 		typeObject = TypeManager.getInstance().getType(type);
 		for(CaseColMetaData c : caseList){
+			c.type = typeObject;
 			c.compile();
 		}
 	}
@@ -75,5 +77,33 @@ public class EnumMetaData implements Type ,MetaData{
 		dataValidation.createPromptBox(col.name, note.toString());
 		return dataValidation;
 	}
+
+	@Override
+	public void print(PrintWriter writer) {
+		writer.println(String.format("package %s;", pkg.substring(0, pkg.length()-1)));
+		writer.println();
+		writer.println();
+		writer.println(String.format("public class %s {", name));
+		for(CaseColMetaData c : caseList){
+			c.print(writer);
+		}
+		writer.println("}");
+	}
+
+	@Override
+	public String getPrintStr() {
+		return typeObject.getPrintStr();
+	}
+
+	@Override
+	public String save(String name, String element) {
+		return typeObject.save(name, element);
+	}
+
+	@Override
+	public String read(String name, String element) {
+		return typeObject.read(name, element);
+	}
+
 
 }
