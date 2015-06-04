@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -40,7 +41,8 @@ public class XMLCreater {
 				Cell cell = row.getCell(j);
 				ColMetaData colMeta = table.colList.get(j); 
 				if(colMeta.typeObject instanceof StringType){
-					el.addAttribute(colMeta.name, cell.getStringCellValue());
+					String name = cell.getStringCellValue();
+					el.addAttribute(colMeta.name, name);
 				}else if(colMeta.typeObject instanceof EnumMetaData){
 					EnumMetaData typeData = (EnumMetaData) colMeta.typeObject;
 					String val = cell.getStringCellValue();
