@@ -1,6 +1,7 @@
 package xls.meta;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,6 +28,7 @@ public class XMLCreater {
 	public void doCreate(String excelDir ,String parentDir) throws Exception{
 		File excelfile = new File(excelDir + File.separator + table.excelFile);
 		Document doc = DocumentHelper.createDocument();
+		doc.setXMLEncoding("utf-8");
 		Element root = DocumentHelper.createElement("data");
 		doc.add(root);
 		Workbook workbook = null;
@@ -60,7 +62,7 @@ public class XMLCreater {
 		OutputFormat format = OutputFormat.createPrettyPrint();
         format.setEncoding("UTF-8");// 设置XML文件的编码格式
         XMLWriter writer;
-		writer = new XMLWriter(new FileWriter(parentDir + File.separator + table.getName()+".xml"), format);
+		writer = new XMLWriter(new FileOutputStream(parentDir + File.separator + table.getName()+".xml"), format);
         writer.write(doc);
         writer.close();
 	}
