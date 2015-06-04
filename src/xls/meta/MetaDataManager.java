@@ -27,27 +27,64 @@ public class MetaDataManager {
 	private String beanDir;
 	private String codeDir;
 	private String codeType;
+	private String xmlDir;
 	private Map<String,String> templateMap = new HashMap<String, String>();
+	private int action;
+	private static final int ACTION_CREATE_EXCEL = 1;
+	private static final int ACTION_CREATE_CODE = 2;
+	private static final int ACTION_CREATE_XML = 3;
 	
 	public static MetaDataManager getInstance(){
 		return instance;
 	}
 	
+	public void doAction() throws Exception{
+		switch(action)
+		{
+		case ACTION_CREATE_EXCEL:
+			System.out.println("create excel");
+			createExcel();
+			break;
+		case ACTION_CREATE_CODE:
+			System.out.println("create code");
+			genCode();
+			break;
+		case ACTION_CREATE_XML:
+			System.out.println("create xml");
+			genXML();
+			break;
+		}
+		System.out.println("complete action");
+	}
+	
 	public void initArg(String []args){
-		if(args.length != 8){
+		if(args.length != 10){
 			printUsage();
 			throw new RuntimeException("wrong arguments");
 		}
+		int target = 0xF | (1<<4);
+		int cur = 0;
 		for(int i=0 ; i<args.length ; i++){
 			if(args[i].equals("-meta")){
 				metaDir = args[++i];
+				cur |=1;
 			}else if(args[i].equals("-excel")){
 				excelDir = args[++i];
+				cur |= (1<<1);
 			}else if(args[i].equals("-code")){
 				codeDir = args[++i];
-			}else if(args[i].equals("-lang")){
-				codeType = args[++i];
+				cur |= (1<<2);
+			}else if(args[i].equals("-xml")){
+				xmlDir = args[++i];
+				cur |= (1<<3);
+			}else if(args[i].equals("-type")){
+				action = Integer.parseInt(args[++i]);
+				cur |= (1<<4);
 			}
+		}
+		if(target != cur){
+			printUsage();
+			throw new RuntimeException("wrong arguments");
 		}
 	}
 	
@@ -73,7 +110,7 @@ public class MetaDataManager {
 	private void printUsage(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("usage : \n");
-		sb.append("\t-meta metaDir -bean beanDir -excel excelDir -code codeDir -lang language");
+		sb.append("\t-meta metaDir -bean beanDir -excel excelDir -code codeDir -xml xml -type [1 excel|2 code |3 xml]");
 		System.out.println(sb.toString());
 	}
 	
@@ -146,6 +183,17 @@ public class MetaDataManager {
 		for(TableMetaData table : tableMap.values()){
 			ExcelCreater creater = new ExcelCreater(table);
 			creater.doCreate(excelDir);
+		}
+	}
+	
+	public void genXML() throws Exception{
+		File dir = new File(xmlDir);
+		if(!dir.exists()){
+			dir.mkdir();
+		}
+		for(TableMetaData table : tableMap.values()){
+			XMLCreater creater = new XMLCreater(table);
+			creater.doCreate(excelDir ,xmlDir);
 		}
 	}
 	

@@ -6,8 +6,7 @@ public class Main {
 		MetaDataManager.getInstance().initArg(args);
 		MetaDataManager.getInstance().load();
 		MetaDataManager.getInstance().compile();
-		MetaDataManager.getInstance().genCode();
-		//MetaDataManager.getInstance().createExcel();
+		MetaDataManager.getInstance().doAction();
 	}
 
 }
