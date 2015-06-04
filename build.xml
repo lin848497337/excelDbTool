@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="excelDbTool" basedir="." default="makeJar">
+	
+	<property name="bin" value="bin"/>
+	<property name="classes" value="classes"/>
+	<property name="src" value="src"/>
+	<property name="lib" value="lib" />
+	<property name="main-class" value="xls.meta.Main" />
+	<path id="classpath">
+        <fileset  dir="${lib}" includes="**/*.jar"/>
+	</path>
+	 <pathconvert property="mf.classpath" pathsep=" ">
+	 	<mapper>
+	 	     <chainedmapper>
+	 	       <!-- remove absolute path -->
+	 	       <flattenmapper />
+	 	       <!-- add lib/ prefix -->
+	 	       <globmapper from="*" to="lib/*" />
+	 	     </chainedmapper>
+ 	     </mapper>
+         <path refid="classpath" />
+     </pathconvert>
+	
+	<path id="compile.path">
+		<fileset dir="${lib}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	
+	<target name="init">
+		<delete dir="${bin}" />
+		<delete dir="${classes}" />
+		<mkdir dir="${bin}"/>
+		<mkdir dir="${classes}"/>
+	</target>
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${classes}" verbose="true">
+			<classpath refid="compile.path" />
+		</javac>
+	</target>
+	<target name="makeJar" depends="compile">
+		<jar destfile="${bin}/excel2xml.jar" basedir="${classes}">
+			<manifest>
+				<attribute name="Author" value="charles"/>
+				<attribute name="Main-Class" value="${main-class}"/>
+				<attribute name="Class-Path" value="${mf.classpath}"/>
+			</manifest>
+		</jar>
+	</target>
+</project>
