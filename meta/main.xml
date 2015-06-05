@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <meta>
-	<import src="Test.xml" />
 	<import src="sprite.xml" />
+	<import src="animation.xml" />
 </meta>

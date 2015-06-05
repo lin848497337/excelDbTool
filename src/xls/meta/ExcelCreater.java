@@ -3,6 +3,7 @@ package xls.meta;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataValidation;
@@ -54,7 +55,6 @@ public class ExcelCreater {
 		for(ColMetaData col : table.colList){
 			Cell cell = row.createCell(index++);
 			cell.setCellValue(col.colName);
-			
 			DataValidation dataValidation = col.typeObject.createDataValidation(col, sheet, maxRowNum, index);
 			sheet.addValidationData(dataValidation);
 		}
