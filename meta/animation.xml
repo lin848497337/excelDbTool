@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+	<namespace name="animation">
+	    
+	    <table name="Animation" excelFile="动画.xls" >
+	        <variable name="id" colName="id" type="int" range="1-1000"/>
+	        <variable name="name" colName="名称" type="string" />
+	        <variable name="jsName" colName="json名称" type="string" />
+	        <variable name="plistName" colName="plist名称" type="string" />
+	        <variable name="pngName" colName="png名称" type="string" />
+	        <variable name="rightDown" colName="右下" type="string" />
+	        <variable name="right" colName="右" type="string" />
+	        <variable name="rightUp" colName="右上" type="string" />
+	    </table>
+	    
+	</namespace>
+</meta>

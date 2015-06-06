@@ -35,9 +35,5 @@ public class KeyColMetaData implements MetaData {
 		
 	}
 
-	@Override
-	public void print(PrintWriter writer) {
-		writer.println(String.format("\tpublic %s %s;",typeObject.getPrintStr(),name));
-	}
 
 }

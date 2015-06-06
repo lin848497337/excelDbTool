@@ -37,20 +37,6 @@ public class IntegerType implements Type {
 		return dataValidation;
 	}
 
-	@Override
-	public String getPrintStr() {
-		return "int";
-	}
-
-	@Override
-	public String save(String name, String element) {
-		return String.format("%s.addAttribute(\"%s\",%s+\"\")", element,name,name);
-	}
-
-	@Override
-	public String read(String name, String element) {
-		return String.format("Integer.parseInt(%s.attributeValue(\"%s\"))",element,name);
-	}
 
 
 }

@@ -34,9 +34,4 @@ public class CaseColMetaData implements MetaData {
 		
 	}
 
-	@Override
-	public void print(PrintWriter writer) {
-		writer.println(String.format("\tpublic static final %s %s=%s;",type.getPrintStr(),name,value));
-	}
-
 }

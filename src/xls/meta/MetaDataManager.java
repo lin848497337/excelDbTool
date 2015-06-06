@@ -16,6 +16,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import xls.gen.GenCodeManager;
+
 public class MetaDataManager {
 	private String metaDir;
 	private static MetaDataManager instance = new MetaDataManager();
@@ -24,7 +26,6 @@ public class MetaDataManager {
 	private MetaDataManager(){}
 	private Stack<String> namespaceStack = new Stack<String>();
 	private String excelDir;
-	private String beanDir;
 	private String codeDir;
 	private String codeType;
 	private String xmlDir;
@@ -47,7 +48,10 @@ public class MetaDataManager {
 			break;
 		case ACTION_CREATE_CODE:
 			System.out.println("create code");
-			genCode();
+			GenCodeManager.getInstance().init(codeDir);
+			if(codeType.equals("java")){
+				GenCodeManager.getInstance().genJava();
+			}
 			break;
 		case ACTION_CREATE_XML:
 			System.out.println("create xml");
@@ -58,33 +62,24 @@ public class MetaDataManager {
 	}
 	
 	public void initArg(String []args){
-		if(args.length != 10){
+		if(args.length != 12){
 			printUsage();
 			throw new RuntimeException("wrong arguments");
 		}
-		int target = 0xF | (1<<4);
-		int cur = 0;
 		for(int i=0 ; i<args.length ; i++){
 			if(args[i].equals("-meta")){
 				metaDir = args[++i];
-				cur |=1;
 			}else if(args[i].equals("-excel")){
 				excelDir = args[++i];
-				cur |= (1<<1);
 			}else if(args[i].equals("-code")){
 				codeDir = args[++i];
-				cur |= (1<<2);
 			}else if(args[i].equals("-xml")){
 				xmlDir = args[++i];
-				cur |= (1<<3);
 			}else if(args[i].equals("-type")){
 				action = Integer.parseInt(args[++i]);
-				cur |= (1<<4);
+			}else if(args[i].equals("-lang")){
+				codeType = args[++i];
 			}
-		}
-		if(target != cur){
-			printUsage();
-			throw new RuntimeException("wrong arguments");
 		}
 	}
 	
@@ -107,10 +102,18 @@ public class MetaDataManager {
 		return templateMap.get(type);
 	}
 	
+	public Map<String,TableMetaData> getTableMap(){
+		return tableMap;
+	}
+	
+	public Map<String,EnumMetaData> getEnumMap(){
+		return enumMap;
+	}
+	
 	private void printUsage(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("usage : \n");
-		sb.append("\t-meta metaDir -bean beanDir -excel excelDir -code codeDir -xml xml -type [1 excel|2 code |3 xml]");
+		sb.append("\t-meta metaDir -bean beanDir -excel excelDir -lang [java|cpp] -code codeDir -xml xml -type [1 excel|2 code |3 xml]");
 		System.out.println(sb.toString());
 	}
 	
@@ -194,39 +197,6 @@ public class MetaDataManager {
 		for(TableMetaData table : tableMap.values()){
 			XMLCreater creater = new XMLCreater(table);
 			creater.doCreate(excelDir ,xmlDir);
-		}
-	}
-	
-	public void genCode() throws Exception{
-		File dir = new File(codeDir);
-		if(!dir.exists()){
-			dir.mkdir();
-		}
-		for(EnumMetaData enumData : enumMap.values()){
-			dir = new File(codeDir + File.separator +enumData.pkg.substring(0,enumData.pkg.length()-1) )	;
-			if(!dir.exists()){
-				dir.mkdir();
-			}
-			File file = new File(dir.getPath() + File.separator + enumData.name+".java");
-			if(!file.exists()){
-				file.createNewFile();
-			}
-			PrintWriter writer = new PrintWriter(file);
-			enumData.print(writer);
-			writer.close();
-		}
-		for(TableMetaData table : tableMap.values()){
-			dir = new File(codeDir + File.separator +table.pkg.substring(0,table.pkg.length()-1) )	;
-			if(!dir.exists()){
-				dir.mkdir();
-			}
-			File file = new File(dir.getPath() + File.separator + table.typeName+".java");
-			if(!file.exists()){
-				file.createNewFile();
-			}
-			PrintWriter writer = new PrintWriter(file);
-			table.print(writer);
-			writer.close();
 		}
 	}
 }

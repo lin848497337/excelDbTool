@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="excelDbTool" basedir="." default="makeJar">
 	
-	<property name="bin" value="bin"/>
+	<property name="bin" value="dist"/>
 	<property name="classes" value="classes"/>
 	<property name="src" value="src"/>
 	<property name="lib" value="lib" />

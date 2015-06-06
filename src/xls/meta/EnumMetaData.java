@@ -78,32 +78,6 @@ public class EnumMetaData implements Type ,MetaData{
 		return dataValidation;
 	}
 
-	@Override
-	public void print(PrintWriter writer) {
-		writer.println(String.format("package %s;", pkg.substring(0, pkg.length()-1)));
-		writer.println();
-		writer.println();
-		writer.println(String.format("public class %s {", name));
-		for(CaseColMetaData c : caseList){
-			c.print(writer);
-		}
-		writer.println("}");
-	}
-
-	@Override
-	public String getPrintStr() {
-		return typeObject.getPrintStr();
-	}
-
-	@Override
-	public String save(String name, String element) {
-		return typeObject.save(name, element);
-	}
-
-	@Override
-	public String read(String name, String element) {
-		return typeObject.read(name, element);
-	}
 
 
 }

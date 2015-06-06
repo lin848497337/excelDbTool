@@ -1,7 +1,5 @@
 package xls.meta;
 
-import java.io.PrintWriter;
-
 import org.dom4j.Element;
 
 public interface MetaData {
@@ -9,5 +7,4 @@ public interface MetaData {
 	String getName();
 	void parse(Element el);
 	void compile();
-	void print(PrintWriter writer);
 }
