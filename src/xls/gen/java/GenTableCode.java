@@ -26,7 +26,7 @@ public class GenTableCode{
 		writer.println("\t@Override\n\tpublic void load(org.dom4j.Element element){");
 		for(ColMetaData c : table.colList){
 			xls.gen.java.TypeGen gen = TypeGenFactory.getTypeGen(c.typeObject);
-			writer.println(String.format("\t\t%s = %s;",c.name, gen.read(c.name, "element")));
+			writer.println(String.format("\t%s = %s;",c.name, gen.read(c.name, "element")));
 		}
 		writer.println("\t}");
 		writer.println("\t@Override\n\tpublic void write(org.dom4j.Element element){");

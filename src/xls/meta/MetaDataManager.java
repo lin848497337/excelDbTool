@@ -51,6 +51,8 @@ public class MetaDataManager {
 			GenCodeManager.getInstance().init(codeDir);
 			if(codeType.equals("java")){
 				GenCodeManager.getInstance().genJava();
+			}else if(codeType.equals("cpp")){
+				GenCodeManager.getInstance().genCpp();
 			}
 			break;
 		case ACTION_CREATE_XML:
