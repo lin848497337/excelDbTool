@@ -9,7 +9,7 @@ public class StringTypeGen implements TypeGen {
 
 	@Override
 	public String read(String name, String element) {
-		return String.format("%s->Attribute(\"%s\")", element,name);
+		return String.format("%s->Value(\"%s\")", element,name);
 	}
 
 }

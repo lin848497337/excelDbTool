@@ -17,6 +17,11 @@ public class GenTableCode {
 		writer.println(String.format("#ifndef %s",onlyName));
 		writer.println(String.format("#define %s", onlyName));
 		
+		writer.println();
+		writer.println("#include \"cocos2d.h\"");
+		writer.println("#include \"tinyxml2\tinyxml2.h\"");
+		writer.println();
+		writer.println();
 		writer.println(String.format("class %s",table.typeName));
 		writer.println("{");
 		writer.println("public:");
@@ -35,13 +40,12 @@ public class GenTableCode {
 	public void gen(PrintWriter writer){
 		//just write cpp file
 		writer.println(String.format("#include \"%s.h\"",table.typeName));
-		writer.println("#include \"tinyxml2.h\"");
 		writer.println();
 		writer.println();
 		writer.println("using namespace tinyxml2;");
 		writer.println();
 		writer.println();
-		writer.println(String.format("%s::read(XMLElement *surface)", table.typeName));
+		writer.println(String.format("void %s::read(XMLElement *surface)", table.typeName));
 		writer.println("{");
 		writer.println("\tconst XMLAttribute *attributeOfSurface = surface->FirstAttribute();");
 		for(ColMetaData col : table.colList){
@@ -50,7 +54,7 @@ public class GenTableCode {
 		}
 		writer.println("}");
 		writer.println();
-		writer.println(String.format("%s::loadAll()", table.typeName));
+		writer.println(String.format("void %s::loadAll()", table.typeName));
 		writer.println("{");
 		writer.println("\ttinyxml2::XMLDocument doc;");
 		writer.println(String.format("\tdoc.LoadFile(%s.xml);", table.getName()));
