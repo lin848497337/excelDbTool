@@ -16,13 +16,14 @@ public class EnumTypeGen {
 		String onlyName = String.format("__%S__H__", enumData.getName().replaceAll("\\.", "_").toUpperCase());
 		writer.println(String.format("#ifndef %s",onlyName));
 		writer.println(String.format("#define %s", onlyName));
-		
+		writer.println(String.format("namespace %s{", enumData.pkg.replaceAll("\\.", "_").toLowerCase()));
 		writer.println();
 		writer.println();
 		writer.println(String.format("enum %s{",enumData.name));
 		for(CaseColMetaData cc : enumData.caseList){
 			writer.println(String.format("\t%s=%s,",cc.name,cc.value));
 		}
+		writer.println("}");
 		writer.println("}");
 		
 		

@@ -32,8 +32,7 @@ public class GenCodeManager {
 	public void genCpp() throws IOException{
 		Map<String,EnumMetaData> enums = MetaDataManager.getInstance().getEnumMap();
 		for(EnumMetaData ed : enums.values()){
-			String dir = ed.pkg.replaceAll("\\.", "\\\\");
-			File file = new File(genDir + File.separator + dir + ed.name+".h");
+			File file = new File(genDir + File.separator + ed.name+".h");
 			FileUtil.makeFile(file);
 			PrintWriter writer = new PrintWriter(file);
 			xls.gen.cpp.EnumTypeGen gen = new xls.gen.cpp.EnumTypeGen(ed);
@@ -43,14 +42,13 @@ public class GenCodeManager {
 		Map<String,TableMetaData> tables = MetaDataManager.getInstance().getTableMap();
 		for(TableMetaData table : tables.values()){
 			xls.gen.cpp.GenTableCode gen = new xls.gen.cpp.GenTableCode(table);
-			String dir = table.pkg.replaceAll("\\.", "\\\\");
-			File file = new File(genDir + File.separator + dir + table.typeName+".h");
+			File file = new File(genDir + File.separator + table.typeName+".h");
 			FileUtil.makeFile(file);
 			PrintWriter writer = new PrintWriter(file);
 			gen.genHeader(writer);
 			System.out.println("create "+file.getName());
 			writer.close();
-			file = new File(genDir + File.separator + dir + table.typeName+".cpp");
+			file = new File(genDir + File.separator + table.typeName+".cpp");
 			FileUtil.makeFile(file);
 			writer = new PrintWriter(file);
 			gen.gen(writer);

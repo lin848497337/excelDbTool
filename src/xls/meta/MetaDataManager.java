@@ -85,6 +85,10 @@ public class MetaDataManager {
 		}
 	}
 	
+	public String getXMLDir(){
+		return xmlDir;
+	}
+	
 	public void loadTemplate() throws IOException{
 		File fileDir = new File("template");
 		File temps[] = fileDir.listFiles();

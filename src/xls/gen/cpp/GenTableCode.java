@@ -3,6 +3,7 @@ package xls.gen.cpp;
 import java.io.PrintWriter;
 
 import xls.meta.ColMetaData;
+import xls.meta.MetaDataManager;
 import xls.meta.TableMetaData;
 
 public class GenTableCode {
@@ -21,6 +22,7 @@ public class GenTableCode {
 		writer.println("#include \"cocos2d.h\"");
 		writer.println("#include \"tinyxml2\\tinyxml2.h\"");
 		writer.println();
+		writer.println(String.format("namespace %s{", table.pkg.replaceAll("\\.", "_").toLowerCase()));
 		writer.println();
 		writer.println(String.format("class %s",table.typeName));
 		writer.println("{");
@@ -31,9 +33,9 @@ public class GenTableCode {
 		}
 		writer.println("\tvoid read(tinyxml2::XMLElement *surface);");
 		writer.println("\tstatic void loadAll();");
-		writer.println(String.format("\tstatic std::map<int,%s*> dataMap",table.typeName));
+		writer.println(String.format("\tstatic std::map<int,%s*> dataMap;",table.typeName));
 		writer.println("};");
-		
+		writer.println("}");
 		writer.println("#endif");
 	}
 	
@@ -42,6 +44,7 @@ public class GenTableCode {
 		writer.println(String.format("#include \"%s.h\"",table.typeName));
 		writer.println();
 		writer.println();
+		writer.println(String.format("namespace %s{", table.pkg.replaceAll("\\.", "_").toLowerCase()));
 		writer.println("using namespace tinyxml2;");
 		writer.println();
 		writer.println();
@@ -56,6 +59,7 @@ public class GenTableCode {
 		writer.println(String.format("void %s::loadAll()", table.typeName));
 		writer.println("{");
 		writer.println("\ttinyxml2::XMLDocument doc;");
+		String xmlDir = MetaDataManager.getInstance().getXMLDir();
 		writer.println(String.format("\tdoc.LoadFile(\"%s.xml\");", table.getName()));
 		writer.println("\tXMLElement *root=doc.RootElement();");
 		writer.println(String.format("\tXMLElement *surface=root->FirstChildElement(\"%s\");", table.getName()));
@@ -68,6 +72,7 @@ public class GenTableCode {
 		
 		writer.println("\t\t");
 		writer.println("\t}");
+		writer.println("}");
 		writer.println("}");
 		
 	}
