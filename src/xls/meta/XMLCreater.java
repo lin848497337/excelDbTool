@@ -29,7 +29,7 @@ public class XMLCreater {
 		File excelfile = new File(excelDir + File.separator + table.excelFile);
 		Document doc = DocumentHelper.createDocument();
 		doc.setXMLEncoding("utf-8");
-		Element root = DocumentHelper.createElement("data");
+		Element root = DocumentHelper.createElement("dict");
 		doc.add(root);
 		Workbook workbook = null;
 		workbook = WorkbookFactory.create(excelfile);
