@@ -9,7 +9,7 @@ public class IntegerTypeGen implements TypeGen {
 
 	@Override
 	public String read(String name, String element) {
-		return String.format("%s->IntValue(\"%s\")", element,name);
+		return String.format("%s->IntAttribute(\"%s\")", element,name);
 	}
 
 }

@@ -19,7 +19,7 @@ public class GenTableCode {
 		
 		writer.println();
 		writer.println("#include \"cocos2d.h\"");
-		writer.println("#include \"tinyxml2\tinyxml2.h\"");
+		writer.println("#include \"tinyxml2\\tinyxml2.h\"");
 		writer.println();
 		writer.println();
 		writer.println(String.format("class %s",table.typeName));
@@ -47,24 +47,25 @@ public class GenTableCode {
 		writer.println();
 		writer.println(String.format("void %s::read(XMLElement *surface)", table.typeName));
 		writer.println("{");
-		writer.println("\tconst XMLAttribute *attributeOfSurface = surface->FirstAttribute();");
 		for(ColMetaData col : table.colList){
 			xls.gen.cpp.TypeGen type = TypeGenFactory.getType(col.typeObject);
-			writer.println(String.format("\t\tthis->%s = %s;", col.name,type.read(col.name, "attributeOfSurface")));
+			writer.println(String.format("\tthis->%s = %s;", col.name,type.read(col.name, "surface")));
 		}
 		writer.println("}");
 		writer.println();
 		writer.println(String.format("void %s::loadAll()", table.typeName));
 		writer.println("{");
 		writer.println("\ttinyxml2::XMLDocument doc;");
-		writer.println(String.format("\tdoc.LoadFile(%s.xml);", table.getName()));
+		writer.println(String.format("\tdoc.LoadFile(\"%s.xml\");", table.getName()));
 		writer.println("\tXMLElement *root=doc.RootElement();");
-		writer.println(String.format("\tXMLElement *surface=scene->FirstChildElement(\"%s\");", table.getName()));
+		writer.println(String.format("\tXMLElement *surface=root->FirstChildElement(\"%s\");", table.getName()));
 		writer.println("\twhile(surface)");
 		writer.println("\t{");
-		writer.println(String.format("\t\t%s *data = new %s()",table.typeName,table.typeName));
+		writer.println(String.format("\t\t%s *data = new %s();",table.typeName,table.typeName));
 		writer.println("\t\tdata->read(surface);");
-		writer.println("\t\tthis->dataMap->insert(data->id,data);");
+		writer.println(String.format("\t\t%s::dataMap.insert(std::pair<int,%s*>(data->id,data));",table.typeName,table.typeName));
+		writer.println("\t\tsurface = surface->NextSiblingElement();");
+		
 		writer.println("\t\t");
 		writer.println("\t}");
 		writer.println("}");

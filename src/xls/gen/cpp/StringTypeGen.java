@@ -4,12 +4,12 @@ public class StringTypeGen implements TypeGen {
 
 	@Override
 	public String getCppType() {
-		return "char *";
+		return "std::string";
 	}
 
 	@Override
 	public String read(String name, String element) {
-		return String.format("%s->Value(\"%s\")", element,name);
+		return String.format("std::string(%s->Attribute(\"%s\"))", element,name);
 	}
 
 }
