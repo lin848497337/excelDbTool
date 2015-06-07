@@ -5,6 +5,7 @@
 	    <table name="Animation" excelFile="动画.xls" >
 	        <variable name="id" colName="id" type="int" range="1-1000"/>
 	        <variable name="name" colName="名称" type="string" />
+	        <variable name="ArmatureName" colName="Armature名称" type="string" />
 	        <variable name="jsName" colName="json名称" type="string" />
 	        <variable name="plistName" colName="plist名称" type="string" />
 	        <variable name="pngName" colName="png名称" type="string" />

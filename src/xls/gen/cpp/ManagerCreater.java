@@ -7,12 +7,12 @@ import xls.meta.TableMetaData;
 
 public class ManagerCreater {
 	public void genHeader(PrintWriter writer){
-		writer.println("#ifndef __XML_MANAGER__H__");
-		writer.println("#define __XML_MANAGER__H__");
+		writer.println("#ifndef __XML_DATA_MANAGER__H__");
+		writer.println("#define __XML_DATA_MANAGER__H__");
 		writer.println();
 		writer.println("namespace datamanager{");
 		writer.println();
-		writer.println("class XMLManager");
+		writer.println("class XMLDataManager");
 		writer.println("{");
 		writer.println("public:");
 		writer.println("\tstatic void loadAll();");
@@ -24,25 +24,25 @@ public class ManagerCreater {
 		writer.println("#endif");
 	}
 	public void gen(PrintWriter writer ,Map<String,TableMetaData> tableMap){
-		writer.println("#include \"XMLManager.h\"");
+		writer.println("#include \"XMLDataManager.h\"");
 		for(TableMetaData t : tableMap.values()){
 			writer.println(String.format("#include \"%s.h\"", t.typeName));
 		}
 		writer.println();
 		writer.println("namespace datamanager{");
 		writer.println();
-		writer.println("void XMLManager::loadAll()");
+		writer.println("void XMLDataManager::loadAll()");
 		writer.println("{");
 		for(TableMetaData t : tableMap.values()){
 			String pkg = t.pkg.replaceAll("\\.", "_");
-			writer.println(String.format("\t%s::%s::loadAll()", pkg,t.typeName));
+			writer.println(String.format("\t%s::%s::loadAll();", pkg,t.typeName));
 		}
 		writer.println("}");
-		writer.println("void XMLManager::release()");
+		writer.println("void XMLDataManager::release()");
 		writer.println("{");
 		for(TableMetaData t : tableMap.values()){
 			String pkg = t.pkg.replaceAll("\\.", "_");
-			writer.println(String.format("\t%s::%s::release()", pkg,t.typeName));
+			writer.println(String.format("\t%s::%s::release();", pkg,t.typeName));
 		}
 		writer.println("}");
 		

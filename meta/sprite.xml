@@ -6,6 +6,8 @@
 	        <variable name="id" colName="id" type="int" range="1-1000"/>
 	        <variable name="name" colName="名称" type="string" />
 	        <variable name="animation" colName="动画" type="int" range="1-1000"/>
+	        <variable name="bornX" colName="x" type="int" range="1-1000"/>
+	        <variable name="bornY" colName="y" type="int" range="1-1000"/>
 	    </table>
 	    
 	</namespace>
