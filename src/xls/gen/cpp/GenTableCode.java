@@ -32,6 +32,7 @@ public class GenTableCode {
 			writer.println(String.format("\t%s %s;",type.getCppType(),col.name ));
 		}
 		writer.println("\tvoid read(tinyxml2::XMLElement *surface);");
+		writer.println("\tstatic void release();");
 		writer.println("\tstatic void loadAll();");
 		writer.println(String.format("\tstatic std::map<int,%s*> dataMap;",table.typeName));
 		writer.println("};");
@@ -73,6 +74,17 @@ public class GenTableCode {
 		
 		writer.println("\t\t");
 		writer.println("\t}");
+		writer.println("}");
+		writer.println(String.format("void %s::release()", table.typeName));
+		writer.println("{");
+		writer.println(String.format("\tstd::map<int,%s*>::iterator it = %s::dataMap.begin();", table.typeName,table.typeName));
+		writer.println(String.format("\twhile(it != %s::dataMap.end())", table.typeName));
+		writer.println("\t{");
+		writer.println(String.format("\t\t%s * s = (*it).second;", table.typeName));
+		writer.println("\t\tdelete s;");
+		writer.println("\t\tit++;");
+		writer.println("\t}");
+		writer.println(String.format("\t%s::dataMap.clear();", table.typeName));
 		writer.println("}");
 		writer.println("}");
 		

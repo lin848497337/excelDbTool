@@ -15,6 +15,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import xls.FileUtil;
+
 public class ExcelCreater {
 	
 	private TableMetaData table;
@@ -25,17 +27,14 @@ public class ExcelCreater {
 	}
 	
 	public void doCreate(String outputDir) throws Exception{
-		File dirfile = new File(outputDir);
-		if(!dirfile.exists()){
-			dirfile.mkdir();
-		}
-		int oldRow = 0;
 		File file = new File(outputDir + File.separator + table.excelFile);
+		int oldRow = 0;
 		if(file.exists()){
 			oldRow = loadData(file);
 			file.delete();
 			file = new File(outputDir + File.separator + table.excelFile);
 		}
+		FileUtil.makeFile(file);
 		Workbook workbook = null;
 		if(file.getName().endsWith("xls")){
 			workbook = new HSSFWorkbook();
@@ -66,6 +65,9 @@ public class ExcelCreater {
 				Cell cell = row.createCell(index++);
 				Map<String,Object> mp = dataMap.get(i);
 				Object val = mp.get(col.colName);
+				if(val == null){
+					continue;
+				}
 				if(col.typeObject instanceof IntegerType){
 					cell.setCellValue(Integer.parseInt(val.toString()));
 				}else{
