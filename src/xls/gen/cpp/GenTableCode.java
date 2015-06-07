@@ -47,6 +47,7 @@ public class GenTableCode {
 		writer.println(String.format("namespace %s{", table.pkg.replaceAll("\\.", "_").toLowerCase()));
 		writer.println("using namespace tinyxml2;");
 		writer.println();
+		writer.println(String.format("std::map<int,%s*> %s::dataMap = std::map<int,%s*>();", table.typeName,table.typeName,table.typeName));
 		writer.println();
 		writer.println(String.format("void %s::read(XMLElement *surface)", table.typeName));
 		writer.println("{");
@@ -60,7 +61,7 @@ public class GenTableCode {
 		writer.println("{");
 		writer.println("\ttinyxml2::XMLDocument doc;");
 		String xmlDir = MetaDataManager.getInstance().getXMLDir();
-		writer.println(String.format("\tdoc.LoadFile(\"%s.xml\");", table.getName()));
+		writer.println(String.format("\tdoc.LoadFile(\"%s/%s.xml\");",xmlDir, table.getName()));
 		writer.println("\tXMLElement *root=doc.RootElement();");
 		writer.println(String.format("\tXMLElement *surface=root->FirstChildElement(\"%s\");", table.getName()));
 		writer.println("\twhile(surface)");
