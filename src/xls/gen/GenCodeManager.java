@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 import xls.FileUtil;
+import xls.gen.cpp.ManagerCreater;
 import xls.gen.java.GenEnumCode;
 import xls.gen.java.GenTableCode;
 import xls.meta.EnumMetaData;
@@ -55,6 +56,17 @@ public class GenCodeManager {
 			System.out.println("create "+file.getName());
 			writer.close();
 		}
+		File file = new File(genDir + File.separator + "XMLDataManager"+".h");
+		FileUtil.makeFile(file);
+		PrintWriter writer = new PrintWriter(file);
+		ManagerCreater creater = new ManagerCreater();
+		creater.genHeader(writer);
+		writer.close();
+		file = new File(genDir + File.separator + "XMLDataManager"+".cpp");
+		FileUtil.makeFile(file);
+		writer = new PrintWriter(file);
+		creater.gen(writer, tables);
+		writer.close();
 	}
 	
 	public void genJava() throws IOException{

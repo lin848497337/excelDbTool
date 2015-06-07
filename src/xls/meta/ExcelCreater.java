@@ -61,18 +61,17 @@ public class ExcelCreater {
 		for(int i=1 ; i<=oldRow ; i++){
 			row = sheet.createRow(roleIndex++);
 			index = 0;
-			for(ColMetaData col : table.colList){
-				Cell cell = row.createCell(index++);
-				Map<String,Object> mp = dataMap.get(i);
-				Object val = mp.get(col.colName);
-				if(val == null){
-					continue;
-				}
-				if(col.typeObject instanceof IntegerType){
-					cell.setCellValue(Integer.parseInt(val.toString()));
-				}else{
-					cell.setCellValue(val.toString());
-				}
+			ColMetaData col = table.colList.get(i);
+			Cell cell = row.createCell(index++);
+			Map<String,Object> mp = dataMap.get(i);
+			Object val = mp.get(col.colName);
+			if(val == null){
+				continue;
+			}
+			if(col.typeObject instanceof IntegerType){
+				cell.setCellValue(Integer.parseInt(val.toString()));
+			}else{
+				cell.setCellValue(val.toString());
 			}
 		}
 		FileOutputStream fos = new FileOutputStream(file);
