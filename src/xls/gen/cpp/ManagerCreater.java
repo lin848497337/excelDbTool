@@ -17,7 +17,7 @@ public class ManagerCreater {
 		writer.println("public:");
 		writer.println("\tstatic void loadAll();");
 		writer.println("\tstatic void release();");
-		writer.println("}");
+		writer.println("};");
 		writer.println("}");
 		
 		writer.println();
