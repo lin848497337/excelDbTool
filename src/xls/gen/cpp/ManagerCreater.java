@@ -58,7 +58,7 @@ public class ManagerCreater {
 		}
 		writer.println("}");
 		writer.println("}");
-		writer.println("XMLDataManager _xmlDataManager;");
+		writer.println("datamanager::XMLDataManager _xmlDataManager;");
 	}
 	
 }
