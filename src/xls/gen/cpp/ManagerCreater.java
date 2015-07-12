@@ -15,6 +15,8 @@ public class ManagerCreater {
 		writer.println("class XMLDataManager");
 		writer.println("{");
 		writer.println("public:");
+		writer.println("\tXMLDataManager();");
+		writer.println("\t~XMLDataManager();");
 		writer.println("\tstatic void loadAll();");
 		writer.println("\tstatic void release();");
 		writer.println("};");
@@ -31,6 +33,16 @@ public class ManagerCreater {
 		writer.println();
 		writer.println("namespace datamanager{");
 		writer.println();
+		writer.println("XMLDataManager::XMLDataManager()");
+		writer.println("{");
+		writer.println("\tXMLDataManager::loadAll();");
+		writer.println("}");
+		writer.println();
+		writer.println("XMLDataManager::~XMLDataManager()");
+		writer.println("{");
+		writer.println("\tXMLDataManager::release();");
+		writer.println("}");
+		writer.println();
 		writer.println("void XMLDataManager::loadAll()");
 		writer.println("{");
 		for(TableMetaData t : tableMap.values()){
@@ -45,7 +57,7 @@ public class ManagerCreater {
 			writer.println(String.format("\t%s::%s::release();", pkg,t.typeName));
 		}
 		writer.println("}");
-		
+		writer.println("XMLDataManager _xmlDataManager;");
 		writer.println("}");
 	}
 	
