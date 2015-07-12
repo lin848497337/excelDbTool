@@ -57,8 +57,8 @@ public class ManagerCreater {
 			writer.println(String.format("\t%s::%s::release();", pkg,t.typeName));
 		}
 		writer.println("}");
-		writer.println("XMLDataManager _xmlDataManager;");
 		writer.println("}");
+		writer.println("XMLDataManager _xmlDataManager;");
 	}
 	
 }
