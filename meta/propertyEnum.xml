@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+	<namespace name="role">
+
+		<enum name="PropertyEnum"  type="int">
+			<case name="STR" value="0" str="力量"/>
+			<case name="STA" value="1" str="耐力"/>
+		</enum>
+	    
+	</namespace>
+</meta>

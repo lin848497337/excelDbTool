@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+	<namespace name="role">
+
+	    <table name="Properties" excelFile="属性.xls" >
+	        <variable name="id" colName="id" type="int" range="1-1000"/>
+	        <variable name="name" colName="名称" type="string" />
+	        <variable name="level" colName="等级" type="string" />
+	        <variable name="str" colName="力量" type="int" range="1-1000"/>
+	    </table>
+	    
+	</namespace>
+</meta>

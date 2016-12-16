@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+	<namespace name="item">
+	    
+	    <table name="Item" excelFile="物品.xls" >
+	        <variable name="id" colName="id" type="int" range="1-1000"/>
+	        <variable name="name" colName="名称" type="string" />
+	        <variable name="price" colName="价格" type="string" />
+	    </table>
+	    
+	</namespace>
+</meta>

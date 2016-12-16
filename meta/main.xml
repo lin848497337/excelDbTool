@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <meta>
-	<import src="sprite.xml" />
-	<import src="animation.xml" />
+	<import src="item.xml" />
+	<import src="role.xml" />
+	<!--<import src="propertyEnum.xml" />-->
 </meta>

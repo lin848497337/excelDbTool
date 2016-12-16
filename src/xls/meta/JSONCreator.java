@@ -34,20 +34,26 @@ public class JSONCreator {
                 ColMetaData colMeta = table.colList.get(j);
                 if(colMeta.typeObject instanceof StringType){
                     String name = cell.getStringCellValue();
-                    printWriter.printf("'%s' : '%s',",colMeta.name, name);
+                    printWriter.printf("'%s' : '%s'",colMeta.name, name);
                 }else if(colMeta.typeObject instanceof EnumMetaData){
                     EnumMetaData typeData = (EnumMetaData) colMeta.typeObject;
                     String val = cell.getStringCellValue();
                     for(CaseColMetaData cc : typeData.caseList){
                         if(cc.str.equals(val)){
-                            printWriter.printf("'%s' : %s,",colMeta.name, cc.value);
+                            printWriter.printf("'%s' : %s",colMeta.name, cc.value);
                         }
                     }
                 }else if(colMeta.typeObject instanceof IntegerType){
-                    printWriter.printf("%s, %s,",colMeta.name, cell.getNumericCellValue()+"");
+                    printWriter.printf("'%s': %s",colMeta.name, cell.getNumericCellValue()+"");
+                }
+                if (j < colNum - 1){
+                    printWriter.printf(",");
                 }
             }
-            printWriter.printf("end:''}");
+            printWriter.printf("}");
+            if (i <= rowNum - 1){
+                printWriter.printf(",");
+            }
         }
         printWriter.printf("];");
         printWriter.close();
