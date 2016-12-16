@@ -1,5 +1,6 @@
 package xls.gen.java;
 
+import xls.meta.DoubleType;
 import xls.meta.EnumMetaData;
 import xls.meta.IntegerType;
 import xls.meta.StringType;
@@ -15,6 +16,9 @@ public class TypeGenFactory {
 		if(type instanceof EnumMetaData){
 			EnumMetaData ed = (EnumMetaData)type;
 			return getTypeGen(ed.typeObject);
+		}
+		if (type instanceof DoubleType){
+			return new DoubleTypeGen();
 		}
 		return null;
 	}

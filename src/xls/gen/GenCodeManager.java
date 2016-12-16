@@ -1,11 +1,5 @@
 package xls.gen;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
-
 import xls.FileUtil;
 import xls.gen.cpp.ManagerCreater;
 import xls.gen.java.GenEnumCode;
@@ -13,6 +7,11 @@ import xls.gen.java.GenTableCode;
 import xls.meta.EnumMetaData;
 import xls.meta.MetaDataManager;
 import xls.meta.TableMetaData;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 
 public class GenCodeManager {
 	

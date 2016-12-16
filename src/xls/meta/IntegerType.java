@@ -1,15 +1,13 @@
 package xls.meta;
 
-import java.io.PrintWriter;
-
 import org.apache.poi.ss.usermodel.DataValidation;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddressList;
-import org.dom4j.Element;
 
 
-public class IntegerType implements Type {
+public class
+IntegerType implements Type {
 
 	@Override
 	public String name() {

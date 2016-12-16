@@ -9,6 +9,7 @@ public class TypeManager {
 	private Map<String,Type> typeMap = new HashMap<String,Type>();
 	static{
 		instance.registerType(new IntegerType());
+		instance.registerType(new DoubleType());
 		instance.registerType(new StringType());
 	}
 	

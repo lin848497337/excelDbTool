@@ -3,10 +3,8 @@ package xls.meta;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -28,13 +26,10 @@ public class MetaDataManager {
 	private String excelDir;
 	private String codeDir;
 	private String codeType;
-	private String xmlDir;
+	private String dataDir;
 	private Map<String,String> templateMap = new HashMap<String, String>();
-	private int action;
-	private static final int ACTION_CREATE_EXCEL = 1;
-	private static final int ACTION_CREATE_CODE = 2;
-	private static final int ACTION_CREATE_XML = 3;
-	
+	private ActionTypeEnum action;
+
 	public static MetaDataManager getInstance(){
 		return instance;
 	}
@@ -42,11 +37,11 @@ public class MetaDataManager {
 	public void doAction() throws Exception{
 		switch(action)
 		{
-		case ACTION_CREATE_EXCEL:
+		case CREATE_EXCEL:
 			System.out.println("create excel");
 			createExcel();
 			break;
-		case ACTION_CREATE_CODE:
+		case GEN_CODE:
 			System.out.println("create code");
 			GenCodeManager.getInstance().init(codeDir);
 			if(codeType.equals("java")){
@@ -55,10 +50,15 @@ public class MetaDataManager {
 				GenCodeManager.getInstance().genCpp();
 			}
 			break;
-		case ACTION_CREATE_XML:
+		case GEN_XML:
 			System.out.println("create xml");
 			genXML();
 			break;
+		case GEN_JSON:
+			System.out.println("create json");
+			genJSON();
+			break;
+
 		}
 		System.out.println("complete action");
 	}
@@ -75,10 +75,14 @@ public class MetaDataManager {
 				excelDir = args[++i];
 			}else if(args[i].equals("-code")){
 				codeDir = args[++i];
-			}else if(args[i].equals("-xml")){
-				xmlDir = args[++i];
-			}else if(args[i].equals("-type")){
-				action = Integer.parseInt(args[++i]);
+			}else if(args[i].equals("-data")){
+				dataDir = args[++i];
+			}else if(args[i].equals("-action")){
+				action = ActionTypeEnum.getValue(args[++i]);
+				if (action == null) {
+					printUsage();
+					throw new RuntimeException("wrong arguments of action");
+				}
 			}else if(args[i].equals("-lang")){
 				codeType = args[++i];
 			}
@@ -86,7 +90,7 @@ public class MetaDataManager {
 	}
 	
 	public String getXMLDir(){
-		return xmlDir;
+		return dataDir;
 	}
 	
 	public void loadTemplate() throws IOException{
@@ -119,7 +123,7 @@ public class MetaDataManager {
 	private void printUsage(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("usage : \n");
-		sb.append("\t-meta metaDir -bean beanDir -excel excelDir -lang [java|cpp] -code codeDir -xml xml -type [1 excel|2 code |3 xml]");
+		sb.append("\t-meta metaDir -bean beanDir -excel excelDir -lang [java|cpp] -code codeDir -data xml -action [excel|code |xml|json]");
 		System.out.println(sb.toString());
 	}
 	
@@ -196,13 +200,24 @@ public class MetaDataManager {
 	}
 	
 	public void genXML() throws Exception{
-		File dir = new File(xmlDir);
+		File dir = new File(dataDir);
 		if(!dir.exists()){
 			dir.mkdir();
 		}
 		for(TableMetaData table : tableMap.values()){
 			XMLCreater creater = new XMLCreater(table);
-			creater.doCreate(excelDir ,xmlDir);
+			creater.doCreate(excelDir , dataDir);
+		}
+	}
+
+	public void genJSON() throws Exception{
+		File dir = new File(dataDir);
+		if(!dir.exists()){
+			dir.mkdir();
+		}
+		for(TableMetaData table : tableMap.values()){
+			JSONCreator creater = new JSONCreator(table);
+			creater.doCreate(excelDir , dataDir);
 		}
 	}
 }

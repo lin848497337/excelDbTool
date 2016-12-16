@@ -60,7 +60,7 @@ public class XMLCreater {
 			root.add(el);
 		}
 		OutputFormat format = OutputFormat.createPrettyPrint();
-        format.setEncoding("UTF-8");// ÉèÖÃXMLÎÄ¼şµÄ±àÂë¸ñÊ½
+        format.setEncoding("UTF-8");// è®¾ç½®XMLæ–‡ä»¶çš„ç¼–ç æ ¼å¼
         XMLWriter writer;
 		writer = new XMLWriter(new FileOutputStream(parentDir + File.separator + table.getName()+".xml"), format);
         writer.write(doc);

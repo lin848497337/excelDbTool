@@ -41,7 +41,7 @@ public class ExcelCreater {
 		}else if (file.getName().endsWith("xlsx")){
 			workbook = new XSSFWorkbook();
 		}else{
-			throw new RuntimeException("ºó×º´íÎó!");
+			throw new RuntimeException("åç¼€é”™è¯¯!");
 		}
 	    Sheet sheet = workbook.createSheet("data");
 		workbook.setSheetOrder("data", 0);

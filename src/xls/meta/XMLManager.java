@@ -36,7 +36,7 @@ public abstract class XMLManager <T extends XMLManager>{
 	public static void saveDoc(Document doc , String fileName){
 		try {
 			OutputFormat format = OutputFormat.createPrettyPrint();
-	        format.setEncoding("UTF-8");// 设置XML文件的编码格式
+	        format.setEncoding("UTF-8");
 	        XMLWriter writer;
 			writer = new XMLWriter(new FileWriter(fileName), format);
 	        writer.write(doc);

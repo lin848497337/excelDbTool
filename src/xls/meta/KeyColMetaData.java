@@ -1,7 +1,5 @@
 package xls.meta;
 
-import java.io.PrintWriter;
-
 import org.dom4j.Element;
 
 public class KeyColMetaData implements MetaData {
