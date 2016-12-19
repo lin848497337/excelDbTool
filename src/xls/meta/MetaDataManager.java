@@ -48,6 +48,8 @@ public class MetaDataManager {
 				GenCodeManager.getInstance().genJava();
 			}else if(codeType.equals("cpp")){
 				GenCodeManager.getInstance().genCpp();
+			}else if(codeType.equals("js")){
+				GenCodeManager.getInstance().genJavascript();
 			}
 			break;
 		case GEN_XML:
