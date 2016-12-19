@@ -44,7 +44,9 @@ public class JSONCreator {
                         }
                     }
                 }else if(colMeta.typeObject instanceof IntegerType){
-                    printWriter.printf("'%s': %s",colMeta.name, cell.getNumericCellValue()+"");
+                    printWriter.printf("'%s': %d",colMeta.name, new Double(cell.getNumericCellValue()).intValue());
+                }else if(colMeta.typeObject instanceof DoubleType){
+                    printWriter.printf("'%s': %f",colMeta.name, cell.getNumericCellValue());
                 }
                 if (j < colNum - 1){
                     printWriter.printf(",");

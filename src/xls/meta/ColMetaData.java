@@ -32,7 +32,7 @@ public class ColMetaData implements MetaData {
 		if(rangeVal != null && !rangeVal.equals("")){
 			range = new RangeAttri(rangeVal);
 		}
-		if(typeObject instanceof IntegerType && range == null){
+		if((typeObject instanceof IntegerType || typeObject instanceof DoubleType) && range == null){
 			throw new RuntimeException("col "+name+" must have range attribute");
 		}
 	}

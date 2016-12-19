@@ -2,11 +2,17 @@
 <meta>
 	<namespace name="role">
 
+		<enum name="PropertyEnum"  type="int">
+			<case name="STR" value="0" str="力量"/>
+			<case name="STA" value="1" str="耐力"/>
+		</enum>
+
 	    <table name="Properties" excelFile="属性.xls" >
 	        <variable name="id" colName="id" type="int" range="1-1000"/>
 	        <variable name="name" colName="名称" type="string" />
 	        <variable name="level" colName="等级" type="string" />
 	        <variable name="str" colName="力量" type="int" range="1-1000"/>
+	        <variable name="p" colName="属性" type="role.PropertyEnum" />
 	    </table>
 	    
 	</namespace>

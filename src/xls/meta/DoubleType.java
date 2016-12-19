@@ -21,7 +21,7 @@ public class DoubleType implements Type {
 
     @Override
     public DataValidation createDataValidation(ColMetaData col, Sheet sheet, int maxRowNum, int index) {
-        String formula = String.format("IF(AND(DECIMAL(CELL(\"contents\"))=CELL(\"contents\"),DECIMAL(CELL(\"contents\"))>=%d, DECIMAL(CELL(\"contents\")) <= %d, COUNTIF($A$1:$A$%d, CELL(\"contents\"))<2),TRUE,FALSE)", col.range.min,col.range.max,maxRowNum);
+        String formula = String.format("IF(AND(VALUE(CELL(\"contents\"))=CELL(\"contents\"),VALUE(CELL(\"contents\"))>=%d, VALUE(CELL(\"contents\")) <= %d, COUNTIF($A$1:$A$%d, CELL(\"contents\"))<2),TRUE,FALSE)", col.range.min,col.range.max,maxRowNum);
         DataValidationConstraint constraint = sheet.getDataValidationHelper().createCustomConstraint(formula);
         CellRangeAddressList regions = new CellRangeAddressList(1, maxRowNum, index-1, index-1);
         DataValidation dataValidation = sheet.getDataValidationHelper().createValidation(constraint, regions);
