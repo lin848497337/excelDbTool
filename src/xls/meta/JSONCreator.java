@@ -55,7 +55,7 @@ public class JSONCreator {
                 printWriter.printf(",");
             }
         }
-        printWriter.printf("];");
+        printWriter.printf("];module.exports = %s;",table.typeName);
         printWriter.close();
     }
 }
