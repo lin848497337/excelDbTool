@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+    <namespace name="reward">
+
+        <table name="Reward" excelFile="奖励掉落.xls" >
+            <variable name="id" colName="id" type="int" range="1-100000"/>
+            <variable name="name" colName="名称" type="string" />
+            <variable name="maxNum" colName="最大个数" type="int"  range="1-5"/>
+            <variable name="minNum" colName="最小个数" type="int"  range="1-5"/>
+            <variable name="itemId1" colName="物品1ID" type="int"  range="0-100000"/>
+            <variable name="itemId1Rate" colName="物品1概率" type="int"  range="0-100000"/>
+            <variable name="itemId2" colName="物品2ID" type="int"  range="0-100000"/>
+            <variable name="itemId2Rate" colName="物品2概率" type="int"  range="0-100000"/>
+            <variable name="itemId3" colName="物品3ID" type="int"  range="0-100000"/>
+            <variable name="itemId3Rate" colName="物品3概率" type="int"  range="0-100000"/>
+            <variable name="itemId4" colName="物品4ID" type="int"  range="0-100000"/>
+            <variable name="itemId4Rate" colName="物品4概率" type="int"  range="0-100000"/>
+            <variable name="itemId5" colName="物品5ID" type="int"  range="0-100000"/>
+            <variable name="itemId5Rate" colName="物品5概率" type="int"  range="0-100000"/>
+        </table>
+
+
+    </namespace>
+</meta>

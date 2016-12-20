@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+    <namespace name="monster">
+
+        <enum name="MonsterStarLevelEnum"  type="int">
+            <case name="LV_1" value="0" str="普通"/>
+            <case name="LV_2" value="1" str="精英"/>
+            <case name="LV_3" value="2" str="BOSS"/>
+        </enum>
+
+        <!-- 战斗 -->
+        <table name="Monster" excelFile="怪物.xls" >
+            <variable name="id" colName="id" type="int" range="1-100000"/>
+            <variable name="name" colName="名称" type="string" />
+            <variable name="level" colName="等级" type="int" range="1-10000"/>
+            <variable name="starLevel" colName="星级" type="monster.MonsterStarLevelEnum" />
+            <variable name="STR" colName="力量" type="int" range="1-10000"/>
+            <variable name="INT" colName="智力" type="int" range="1-10000"/>
+            <variable name="CON" colName="耐力" type="int" range="1-10000"/>
+            <variable name="STA" colName="体力" type="int" range="1-10000"/>
+            <variable name="DEX" colName="敏捷" type="int" range="1-10000"/>
+            <variable name="HP" colName="气血" type="int" range="1-10000"/>
+            <variable name="MP" colName="灵力" type="int" range="1-10000"/>
+            <variable name="PHYATK" colName="物攻" type="int" range="1-10000"/>
+            <variable name="MAGATK" colName="法攻" type="int" range="1-10000"/>
+            <variable name="PHYDEF" colName="物防" type="int" range="1-10000"/>
+            <variable name="MAGDEF" colName="法防" type="int" range="1-10000"/>
+            <variable name="HIT" colName="命中" type="int" range="1-10000"/>
+            <variable name="DODGE" colName="闪避" type="int" range="1-10000"/>
+            <variable name="CRT" colName="暴击" type="double" range="0-10000"/>
+            <variable name="CRTRATE" colName="暴击率" type="double" range="0-10000"/>
+            <variable name="SPEED" colName="速度" type="int" range="1-10000"/>
+            <variable name="skillListId" colName="技能列表ID" type="int" range="0-10000"/>
+            <variable name="model" colName="模型" type="string" />
+            <variable name="rewardExp" colName="经验" type="int" range="1-10000"/>
+            <variable name="rewardId" colName="掉落Id" type="int" range="1-10000"/>
+        </table>
+
+
+        <!-- 显示 -->
+        <table name="MonsterTeam" excelFile="怪物团.xls" >
+            <variable name="id" colName="id" type="int" range="1-1000"/>
+            <variable name="name" colName="名称" type="string" />
+            <variable name="model" colName="模型" type="string" />
+            <variable name="monster1" colName="怪物1" type="int"  range="1-100000"/>
+            <variable name="monster2" colName="怪物2" type="int"  range="0-100000"/>
+            <variable name="monster3" colName="怪物3" type="int"  range="0-100000"/>
+            <variable name="monster4" colName="怪物4" type="int"  range="0-100000"/>
+            <variable name="monster5" colName="怪物5" type="int"  range="0-100000"/>
+            <variable name="monster6" colName="怪物6" type="int"  range="0-100000"/>
+        </table>
+
+    </namespace>
+</meta>

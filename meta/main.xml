@@ -2,5 +2,7 @@
 <meta>
 	<import src="item.xml" />
 	<import src="role.xml" />
-	<!--<import src="propertyEnum.xml" />-->
+	<import src="monster.xml" />
+	<import src="skill.xml" />
+	<import src="reward.xml" />
 </meta>

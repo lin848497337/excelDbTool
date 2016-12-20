@@ -3,16 +3,70 @@
 	<namespace name="role">
 
 		<enum name="PropertyEnum"  type="int">
-			<case name="STR" value="0" str="力量"/>
-			<case name="STA" value="1" str="耐力"/>
+			<case name="STR" str="力量" value="1" />
+			<case name="INT" str="智力" value="2" />
+			<case name="CON" str="耐力" value="3" />
+			<case name="STA" str="体力" value="4" />
+			<case name="DEX" str="敏捷" value="5" />
+			<case name="HP" str="气血" value="6" />
+			<case name="MP" str="灵力" value="7" />
+			<case name="PHYATK" str="物攻" value="8" />
+			<case name="MAGATK" str="法攻" value="9" />
+			<case name="PHYDEF" str="物防" value="10" />
+			<case name="MAGDEF" str="法防" value="11" />
+			<case name="HIT" str="命中" value="12" />
+			<case name="DODGE" str="闪避" value="13" />
+			<case name="CRT" str="暴击" value="14" />
+			<case name="CRTRATE" str="暴击率" value="15" />
+			<case name="SPEED" str="速度" value="16" />
 		</enum>
 
-	    <table name="Properties" excelFile="属性.xls" >
+
+		<enum name="MainPropertyEnum"  type="int">
+			<case name="STR" str="力量" value="1" />
+			<case name="INT" str="智力" value="2" />
+			<case name="CON" str="耐力" value="3" />
+			<case name="STA" str="体力" value="4" />
+			<case name="DEX" str="敏捷" value="5" />
+		</enum>
+
+		<enum name="FightPropertyEnum"  type="int">
+			<case name="HP" str="气血" value="6" />
+			<case name="MP" str="灵力" value="7" />
+			<case name="PHYATK" str="物攻" value="8" />
+			<case name="MAGATK" str="法攻" value="9" />
+			<case name="PHYDEF" str="物防" value="10" />
+			<case name="MAGDEF" str="法防" value="11" />
+			<case name="HIT" str="命中" value="12" />
+			<case name="DODGE" str="闪避" value="13" />
+			<case name="CRT" str="暴击" value="14" />
+			<case name="CRTRATE" str="暴击率" value="15" />
+			<case name="SPEED" str="速度" value="16" />
+		</enum>
+
+	    <table name="RoleProperties" excelFile="角色属性.xls" >
 	        <variable name="id" colName="id" type="int" range="1-1000"/>
 	        <variable name="name" colName="名称" type="string" />
-	        <variable name="level" colName="等级" type="string" />
-	        <variable name="str" colName="力量" type="int" range="1-1000"/>
-	        <variable name="p" colName="属性" type="role.PropertyEnum" />
+	        <variable name="level" colName="等级" type="int" range="1-10000"/>
+			<variable name="STR" colName="力量" type="int" range="1-10000"/>
+			<variable name="INT" colName="智力" type="int" range="1-10000"/>
+			<variable name="CON" colName="耐力" type="int" range="1-10000"/>
+			<variable name="STA" colName="体力" type="int" range="1-10000"/>
+			<variable name="DEX" colName="敏捷" type="int" range="1-10000"/>
+			<variable name="HP" colName="气血" type="int" range="1-10000"/>
+			<variable name="MP" colName="灵力" type="int" range="1-10000"/>
+			<variable name="PHYATK" colName="物攻" type="int" range="1-10000"/>
+			<variable name="MAGATK" colName="法攻" type="int" range="1-10000"/>
+			<variable name="PHYDEF" colName="物防" type="int" range="1-10000"/>
+			<variable name="MAGDEF" colName="法防" type="int" range="1-10000"/>
+			<variable name="HIT" colName="命中" type="int" range="1-10000"/>
+			<variable name="DODGE" colName="闪避" type="int" range="1-10000"/>
+			<variable name="CRT" colName="暴击" type="double" range="0-10000"/>
+			<variable name="CRTRATE" colName="暴击率" type="double" range="0-10000"/>
+			<variable name="SPEED" colName="速度" type="int" range="1-10000"/>
+			<variable name="exp" colName="经验上限" type="int" range="1-100000"/>
+			<variable name="skillListId" colName="技能列表ID" type="int" range="0-10000"/>
+			<variable name="model" colName="模型" type="string" />
 	    </table>
 	    
 	</namespace>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta>
+    <namespace name="skill">
+
+        <enum name="SkillStarLevelEnum"  type="int">
+            <case name="LV1" value="0" str="普通"/>
+            <case name="LV2" value="1" str="高级"/>
+            <case name="LV3" value="2" str="超级"/>
+        </enum>
+
+        <table name="SkillList" excelFile="技能列表.xls" >
+            <variable name="id" colName="id" type="int" range="1-1000"/>
+            <variable name="name" colName="名称" type="string" />
+            <variable name="minNum" colName="最小技能个数" type="int" range="0-5"/>
+            <variable name="maxNum" colName="最大技能个数" type="int" range="0-5"/>
+            <variable name="skill1" colName="技能1" type="int" range="0-10000"/>
+            <variable name="skill1Rate" colName="技能1概率" type="int" range="0-10000"/>
+            <variable name="skill2" colName="技能2" type="int" range="0-10000"/>
+            <variable name="skill2Rate" colName="技能2概率" type="int" range="0-10000"/>
+            <variable name="skill3" colName="技能3" type="int" range="0-10000"/>
+            <variable name="skill3Rate" colName="技能3概率" type="int" range="0-10000"/>
+            <variable name="skill4" colName="技能4" type="int" range="0-10000"/>
+            <variable name="skill4Rate" colName="技能4概率" type="int" range="0-10000"/>
+            <variable name="skill5" colName="技能5" type="int" range="0-10000"/>
+            <variable name="skill5Rate" colName="技能5概率" type="int" range="0-10000"/>
+        </table>
+
+        <table name="Skill" excelFile="技能.xls" >
+            <variable name="id" colName="id" type="int" range="1-10000"/>
+            <variable name="name" colName="名称" type="string" />
+            <variable name="icon" colName="icon" type="string" />
+            <variable name="starLevel" colName="星级" type="skill.SkillStarLevelEnum" />
+            <variable name="effect1" colName="效果1" type="int" range="0-10000"/>
+            <variable name="effect2" colName="效果2" type="int" range="0-10000"/>
+            <variable name="effect3" colName="效果3" type="int" range="0-10000"/>
+            <variable name="effect4" colName="效果4" type="int" range="0-10000"/>
+            <variable name="effect5" colName="效果5" type="int" range="0-10000"/>
+        </table>
+
+
+
+        <table name="Effect" excelFile="技能效果.xls" >
+            <variable name="id" colName="id" type="int" range="1-10000"/>
+            <variable name="name" colName="名称" type="string" />
+            <variable name="param1" colName="参数1" type="double" range="0-100000"/>
+            <variable name="param2" colName="参数2" type="double" range="0-100000"/>
+            <variable name="param2" colName="参数3" type="double" range="0-100000"/>
+            <variable name="param2" colName="参数4" type="double" range="0-100000"/>
+            <variable name="scriptName" colName="ScriptName" type="string" />
+        </table>
+
+    </namespace>
+</meta>
