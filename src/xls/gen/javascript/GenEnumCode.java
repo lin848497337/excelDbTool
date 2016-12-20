@@ -33,6 +33,6 @@ public class GenEnumCode {
 				}
 			}
 		}
-		writer.println("};");
+		writer.printf("};module.exports = %s;",emd.name);
 	}
 }
