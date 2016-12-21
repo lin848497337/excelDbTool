@@ -21,12 +21,17 @@ public class TypeManager {
 	
 	public Type getType(String typeName){
 		Type type = typeMap.get(typeName);
+		if (type == null){
+			throw new RuntimeException("can not find type : for typeName = "+typeName);
+		}
 		type.compile();
 		return type;
 	}
 	
 	public void registerType(Type type){
-		typeMap.put(type.name(), type);
+		if(typeMap.put(type.name(), type) != null){
+			throw new RuntimeException("duplicate type for type : "+type.name());
+		}
 	}
 	
 }

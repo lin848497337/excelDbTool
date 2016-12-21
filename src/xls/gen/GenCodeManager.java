@@ -94,7 +94,8 @@ public class GenCodeManager {
 	public void genJavascript() throws IOException{
 		Map<String,EnumMetaData> enums = MetaDataManager.getInstance().getEnumMap();
 		for(EnumMetaData ed : enums.values()){
-			File file = new File(genDir + File.separator + ed.name+".js");
+			String dir = ed.pkg.replaceAll("\\.", "_");
+			File file = new File(genDir + File.separator +dir+ ed.name+".js");
 			FileUtil.makeFile(file);
 			PrintWriter writer = new PrintWriter(file);
 			xls.gen.javascript.GenEnumCode gen = new xls.gen.javascript.GenEnumCode(ed);

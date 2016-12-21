@@ -19,7 +19,7 @@ public class JSONCreator {
 
     public void doCreate(String excelDir ,String parentDir) throws Exception{
         File excelfile = new File(excelDir + File.separator + table.excelFile);
-        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(parentDir + File.separator + table.typeName+".js")));
+        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(parentDir + File.separator + table.getName().replaceAll("\\.","_")+".js")));
         Workbook workbook = null;
         workbook = WorkbookFactory.create(excelfile);
         Sheet sheet = workbook.getSheet("data");

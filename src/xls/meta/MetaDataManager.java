@@ -172,14 +172,18 @@ public class MetaDataManager {
 				TableMetaData tableData = new TableMetaData();
 				tableData.parse(el);
 				tableData.setPackage(getCurrentPackage());
-				tableMap.put(tableData.getName(), tableData);
+				if(tableMap.put(tableData.getName(), tableData) != null){
+					throw new RuntimeException("duplicate table for table name : "+tableData.getName());
+				}
 			}else
 				if(el.getName().equals("enum")){
 					EnumMetaData enumMetaData = new EnumMetaData();
 					enumMetaData.parse(el);
 					enumMetaData.setPackage(getCurrentPackage());
 					TypeManager.getInstance().registerType(enumMetaData);
-					enumMap.put(enumMetaData.getName(), enumMetaData);
+					if(enumMap.put(enumMetaData.getName(), enumMetaData)!=null){
+						throw new RuntimeException("duplicate enum for enum name : "+enumMetaData.getName());
+					}
 				}
 		}
 	}
